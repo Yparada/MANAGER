@@ -1,0 +1,40 @@
+name: oci-deploy
+on:
+  push:
+    branches:
+      - '*'
+jobs:
+  build-job:
+    name: Build Job
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Start build job'
+        run: |
+          echo "Starting the build job."
+      - name: 'Checkout'
+        uses: actions/checkout@v2
+
+      - name: 'Setup Java'
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: 'Check Java Version'
+        run: |
+          java --version
+
+      - name: 'Get Instance IP'
+        run: |
+          echo "INSTANCE_IP=$( \
+            oci compute instance list-vnics \
+            --instance-id ${{env.INSTANCE_OCID}} \
+            --query 'data [0]."public-ip"' \
+            --raw-output \
+          )" >> $GITHUB_ENV
+          echo Instance IP: ${{ env.INSTANCE_IP }}
+      - name: 'Wait for SSH'
+        run: |
+          while ! nc -w5 -z ${{ env.INSTANCE_IP }} 22; do
+                  sleep 5
+                  echo "SSH not available..."
+          done; echo "SSH ready!"
