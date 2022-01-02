@@ -4,24 +4,20 @@ on:
     branches:
       - '*'
 jobs:
-  build-job:
-    name: Build Job
+  build-and-push:
+    name: Build and push image
     runs-on: ubuntu-latest
     steps:
-      - name: 'Start build job'
-        run: |
-          echo "Starting the build job."
-      - name: 'Checkout'
-        uses: actions/checkout@v2
-
-      - name: 'Setup Java'
-        uses: actions/setup-java@v1
+      - uses: actions/checkout@master
+      - name: build and push to docker
+      - uses: docker/build-push-action@v2
         with:
-          java-version: 11
-
-      - name: 'Check Java Version'
-        run: |
-          java --version
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: ${{ github.repository }}
+          tag_with_ref: true
+          tag_with_sha: true
+          tags: ${{ github.sha }}
 
       - name: 'Wait for SSH'
         run: |
@@ -29,3 +25,6 @@ jobs:
                   sleep 5
                   echo "SSH not available..."
           done; echo "SSH ready!"
+        -name: Build the Docker image
+        -uses: actions/checkout@v2
+         run: docker build . --file Dockerfile --tag manager:$(date +%s)
