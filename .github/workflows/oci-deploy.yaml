@@ -25,6 +25,3 @@ jobs:
                   sleep 5
                   echo "SSH not available..."
           done; echo "SSH ready!"
-        -name: Build the Docker image
-        -uses: actions/checkout@v2
-         run: docker build . --file Dockerfile --tag manager:$(date +%s)
