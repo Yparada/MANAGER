@@ -17,10 +17,8 @@ jobs:
 
       - name: Build with maven
         run: |
-          mvn --version
-          mvn clean
           mvn install
-          
+
       - name: Publish to Registry
         uses: elgohr/Publish-Docker-Github-Action@master
         with:
@@ -28,3 +26,18 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           snapshot: true
+      - name: 'Wait for SSH'
+        run: |
+          while ! nc -w5 -z ${{ env.INSTANCE_IP }} 22; do
+                  sleep 5
+                  echo "SSH not available..."
+          done; echo "SSH ready!"
+
+      - name: 'Stop App'
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.OCI_IP_TERCERA }}
+          username: opc
+          key: ${{ VM_SSH_PRIVATE_KEY_TERCERA }}
+          script: |
+            sudo docker run -dp 8080:8080  yparada/manager:latest
