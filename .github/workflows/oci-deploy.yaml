@@ -38,6 +38,6 @@ jobs:
         with:
           host: ${{ secrets.OCI_IP_TERCERA }}
           username: opc
-          key: ${{ VM_SSH_PRIVATE_KEY_TERCERA }}
+          key: ${{ secrets.VM_SSH_PRIVATE_KEY_TERCERA }}
           script: |
             sudo docker run -dp 8080:8080  yparada/manager:latest
