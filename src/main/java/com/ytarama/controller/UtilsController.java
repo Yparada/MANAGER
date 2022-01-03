@@ -10,6 +10,6 @@ public class UtilsController {
 
     @GetMapping(path = "/health")
     public String health(){
-        return "OK";
+        return "OK SR";
     }
 }
