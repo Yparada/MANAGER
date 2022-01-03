@@ -28,7 +28,7 @@ jobs:
           snapshot: true
       - name: 'Wait for SSH'
         run: |
-          while ! nc -w5 -z ${{ env.INSTANCE_IP }} 22; do
+          while ! nc -w5 -z ${{ secrets.OCI_IP_TERCERA }} 22; do
                   sleep 5
                   echo "SSH not available..."
           done; echo "SSH ready!"
