@@ -40,4 +40,6 @@ jobs:
           username: ubuntu
           key: ${{ secrets.VM_SSH_PRIVATE_KEY_TERCERA }}
           script: |
-            sudo docker run -dp 8080:8080  yparada/manager:latest
+            cd /home/ubuntu/docker-documets/manager-deploy
+            sudo docker-compose down
+            sudo docker-compose up -d
