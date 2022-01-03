@@ -10,7 +10,6 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: MANAGER
     steps:
       - name: Echo repository
         run: echo ${{ env.DOCKERHUB_REPOSITORY }}
