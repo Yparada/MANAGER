@@ -5,7 +5,7 @@ on:
       - 'master'
 
 env:
-  DOCKERHUB_REPOSITORY: ${{ github.repository }} | tr '[:upper:]' '[:lower:]'
+  DOCKERHUB_REPOSITORY: ${{ github.repository }}
   MANAGER_DB_URL: ${{ secrets.MANAGER_DB_URL }}
   MANAGER_DB_USERNAME: ${{ secrets.MANAGER_DB_USERNAME }}
   MANAGER_DB_PASSWORD: ${{ secrets.MANAGER_DB_PASSWORD }}
@@ -57,7 +57,7 @@ jobs:
             (echo "version: '3.3'"; 
             echo "services:";
             echo "  manager:";
-            echo "    image: ${{ env.DOCKERHUB_REPOSITORY }}:latest";
+            echo "    image: ${{ env.DOCKERHUB_REPOSITORY }}:latest" | tr '[:upper:]' '[:lower:]';
             echo "    container_name: manager-service";
             echo "    environment:";
             echo "            MANAGER_DB_PASSWORD: ${{ env.MANAGER_DB_PASSWORD }}";
