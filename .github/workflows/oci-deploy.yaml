@@ -5,7 +5,7 @@ on:
       - '*'
 
 env:
-  DOCKERHUB_REPOSITORY: ${{ secrets.DOCKER_USERNAME }}/${{ github.repository }}
+  DOCKERHUB_REPOSITORY: ${{ github.repository }}
 
 jobs:
   build:
