@@ -53,7 +53,7 @@ jobs:
             cd /home/ubuntu/docker-documets/manager-deploy
             sudo docker pull yparada/manager:latest
             sudo docker-compose down
-            rm  docker-compose.yaml
+            truncate -s 0 docker-compose.yaml
             (echo "version: '3.3'"; 
             echo "services:";
             echo "  manager:";
