@@ -6,6 +6,9 @@ on:
 
 env:
   DOCKERHUB_REPOSITORY: ${{ github.repository }}
+  MANAGER_DB_URL: ${{ secrets.MANAGER_DB_URL }}
+  MANAGER_DB_USERNAME: ${{ secrets.MANAGER_DB_USERNAME }}
+  MANAGER_DB_PASSWORD: ${{ secrets.MANAGER_DB_PASSWORD }}
 
 jobs:
   build:
