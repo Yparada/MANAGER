@@ -65,6 +65,8 @@ jobs:
             echo "            MANAGER_DB_PASSWORD: ${{ env.MANAGER_DB_PASSWORD }}";
             echo "            MANAGER_DB_URL: ${{ env.MANAGER_DB_URL }}";
             echo "            MANAGER_DB_USERNAME: ${{ env.MANAGER_DB_USERNAME }}";
+            echo "            JWT_SECRET: ${{ env.JWT_SECRET }}";
+            echo "            JWT_EXPIRATION: ${{ env.JWT_EXPIRATION }}";
             echo "    ports:";
             echo "            - 8080:8080";) >> docker-compose.yaml
             sudo docker-compose up -d
