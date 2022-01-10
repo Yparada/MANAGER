@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/state")
+@CrossOrigin(origins = "*",allowedHeaders = "*",methods = {RequestMethod.POST, RequestMethod.GET, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS})
 public class StateController {
 
     @Autowired
