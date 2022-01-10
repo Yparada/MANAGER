@@ -7,6 +7,7 @@ import com.ytarama.service.StateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class StateController {
         return ResponseEntity.ok(stateService.getAllState());
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/createState")
     public ResponseEntity<?> createState(@RequestBody State state){
         State statedb = stateService.findStateByName(state.getName());
@@ -33,6 +35,7 @@ public class StateController {
         return ResponseEntity.ok(stateService.createState(state));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/updateState")
     public ResponseEntity<State> updateState(@RequestBody State state){
         State state1 = stateService.updateState(state);
@@ -42,6 +45,7 @@ public class StateController {
         return ResponseEntity.ok(state1);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/deleteState/{id}")
     public ResponseEntity<State> deleteState(@PathVariable("id") Long id){
         State state = stateService.findStateById(id);
