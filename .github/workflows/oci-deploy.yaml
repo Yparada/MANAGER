@@ -9,6 +9,8 @@ env:
   MANAGER_DB_URL: ${{ secrets.MANAGER_DB_URL }}
   MANAGER_DB_USERNAME: ${{ secrets.MANAGER_DB_USERNAME }}
   MANAGER_DB_PASSWORD: ${{ secrets.MANAGER_DB_PASSWORD }}
+  JWT_SECRET: ${{ secrets.JWT_SECRET }}
+  JWT_EXPIRATION: ${{ secrets.JWT_EXPIRATION }}
 
 jobs:
   build:
