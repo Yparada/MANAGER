@@ -52,21 +52,21 @@ jobs:
           username: ubuntu
           key: ${{ secrets.VM_SSH_PRIVATE_KEY_TERCERA }}
           script: |
-            cd /home/ubuntu/docker-documets/manager-deploy
+            cd /home/ubuntu/docker-documets/nginx-proxy-ssl/
             sudo docker pull yparada/manager:latest
             sudo docker-compose down
-            truncate -s 0 docker-compose.yaml
-            (echo "version: '3.3'"; 
-            echo "services:";
-            echo "  manager:";
-            echo "    image: ${{ env.DOCKERHUB_REPOSITORY }}:latest" | tr '[:upper:]' '[:lower:]';
-            echo "    container_name: manager-service";
-            echo "    environment:";
-            echo "            MANAGER_DB_PASSWORD: ${{ env.MANAGER_DB_PASSWORD }}";
-            echo "            MANAGER_DB_URL: ${{ env.MANAGER_DB_URL }}";
-            echo "            MANAGER_DB_USERNAME: ${{ env.MANAGER_DB_USERNAME }}";
-            echo "            JWT_SECRET: ${{ env.JWT_SECRET }}";
-            echo "            JWT_EXPIRATION: ${{ env.JWT_EXPIRATION }}";
-            echo "    ports:";
-            echo "            - 8080:8080";) >> docker-compose.yaml
+    #        truncate -s 0 docker-compose.yaml
+    #        (echo "version: '3.3'";
+    #        echo "services:";
+    #        echo "  manager:";
+    #        echo "    image: ${{ env.DOCKERHUB_REPOSITORY }}:latest" | tr '[:upper:]' '[:lower:]';
+    #        echo "    container_name: manager-service";
+    #        echo "    environment:";
+    #        echo "            MANAGER_DB_PASSWORD: ${{ env.MANAGER_DB_PASSWORD }}";
+    #        echo "            MANAGER_DB_URL: ${{ env.MANAGER_DB_URL }}";
+    #        echo "            MANAGER_DB_USERNAME: ${{ env.MANAGER_DB_USERNAME }}";
+    #        echo "            JWT_SECRET: ${{ env.JWT_SECRET }}";
+    #        echo "            JWT_EXPIRATION: ${{ env.JWT_EXPIRATION }}";
+    #        echo "    ports:";
+    #        echo "            - 8080:8080";) >> docker-compose.yaml
             sudo docker-compose up -d
