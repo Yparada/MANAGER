@@ -5,6 +5,7 @@ import com.ytarama.entity.Task;
 import com.ytarama.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,11 +28,13 @@ public class TaskController {
         return ResponseEntity.ok(taskService.getByState(state));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/createTask")
     public  ResponseEntity<Task> createTask(@RequestBody Task task){
         return ResponseEntity.ok(taskService.createTask(task));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/updateTask")
     public ResponseEntity<Task> updateTask(@RequestBody Task task){
         Task taskdb = taskService.updateTask(task);
@@ -41,6 +44,7 @@ public class TaskController {
         return ResponseEntity.ok(taskdb);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/deleteTask/{id}")
     public ResponseEntity<Task> deleteTask(@PathVariable("id") Long id){
         Task task = taskService.getById(id);
