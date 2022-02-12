@@ -55,6 +55,12 @@
 			<artifactId>hibernate-validator-annotation-processor</artifactId>
 			<version>7.0.2.Final</version>
 		</dependency>
+		<dependency>
+			<groupId>com.nimbusds</groupId>
+			<artifactId>nimbus-jose-jwt</artifactId>
+			<version>9.19</version>
+		</dependency>
+
 
 
 
